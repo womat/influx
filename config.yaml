@@ -1,0 +1,17 @@
+server:
+  host: 192.168.65.26
+  port: 8086
+  user: admin
+  password: UEPVwPC4KNv9ZGyx4qJE
+
+database:
+  drop: no
+  name: myhome
+
+import:
+  path: C:\Users\mathew\Desktop #C:\Users\mathew\OneDrive\PV-Anlage\_Messdaten\Winsol
+
+# enable debuging and log in logpath
+debug:
+  active: no
+  path: /tmp
