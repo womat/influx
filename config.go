@@ -34,7 +34,7 @@ type configFile struct {
 var currentConfig *configFile
 
 func loadConfig() (*configFile, error) {
-	var configuration = configFile{} //var options commandLineOptions
+	var configuration = configFile{}
 	var err error
 
 	var cfg = conf.New()
@@ -95,6 +95,4 @@ func init() {
 		fmt.Println(influxVersion)
 		os.Exit(0)
 	}
-
-	return
 }

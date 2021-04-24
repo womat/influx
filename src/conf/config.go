@@ -32,8 +32,8 @@ func New() *Config {
 	return &c
 }
 
-// LoadJson loads json config file
-func (c *Config) LoadJson(f string) error {
+// LoadJSON LoadJson loads json config file
+func (c *Config) LoadJSON(f string) error {
 	p := file.Provider(f)
 	c.files[f] = p
 	return c.k.Load(p, json.Parser())
@@ -48,13 +48,12 @@ func (c *Config) LoadYaml(f string) error {
 
 // LoadFlag loads config from flags
 func (c *Config) LoadFlag(f *flag.FlagSet) error {
-	//return c.k.Load(basicflag.Provider(f, c.dl), nil)
 	return c.k.Load(posflag.Provider(f, c.dl, c.k), nil)
 }
 
 // LoadDefault loads default values from map
 // eg
-//cfg.LoadDefault(map[string]interface{}{
+// cfg.LoadDefault(map[string]interface{}{
 //			"com":                 "COM4",
 //			"reset":               false,
 //			"path":                "/tmp",
@@ -86,8 +85,8 @@ func (c *Config) LoadDefault(m map[string]interface{}) error {
 // only "parent1.child1.name" remains.
 func (c *Config) LoadEnv(pfx string) error {
 	return c.k.Load(env.Provider(pfx, c.dl, func(s string) string {
-		return strings.Replace(strings.ToLower(
-			strings.TrimPrefix(s, pfx)), "_", c.dl, -1)
+		return strings.ReplaceAll(strings.ToLower(
+			strings.TrimPrefix(s, pfx)), "_", c.dl)
 	}), nil)
 }
 
@@ -109,8 +108,8 @@ func (c *Config) watch(f string, onReloaded func(), parser koanf.Parser) (err er
 	return
 }
 
-// WatchJson watch loaded json config file for changes, reloads it when changed and triggers onReloaded callback
-func (c *Config) WatchJson(f string, onReloaded func()) error {
+// WatchJSON WatchJson watch loaded json config file for changes, reloads it when changed and triggers onReloaded callback
+func (c *Config) WatchJSON(f string, onReloaded func()) error {
 	return c.watch(f, onReloaded, json.Parser())
 }
 
